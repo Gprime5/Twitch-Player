@@ -96,8 +96,7 @@ class Layout(tk.Tk):
         self.player_frame = ttk.Frame(frame)
         self.player_frame.grid(columnspan=3, sticky="nwes")
         
-        self.elapsedVar = tk.StringVar()
-        self.elapsedVar.set("00:00:00 / 00:00:00")
+        self.elapsedVar = tk.StringVar(value="00:00:00 / 00:00:00")
         ttk.Label(frame, textvariable=self.elapsedVar).grid(column=0, row=1)
         
         self.scaleVar = tk.DoubleVar()
@@ -149,8 +148,7 @@ class Layout(tk.Tk):
         self.box.grid(sticky="nwse")
         self.box.bind("<<ListboxSelect>>", self.listbox_select)
         
-        self.streamer_var = tk.StringVar()
-        self.streamer_var.set("Enter to add streamer")
+        self.streamer_var = tk.StringVar(value="Enter to add streamer")
         entry = ttk.Entry(frame, textvariable=self.streamer_var)
         entry.grid(column=0, row=1)
         entry.bind("<FocusIn>", lambda args: self.streamer_var.set(""))
@@ -236,8 +234,7 @@ class Layout(tk.Tk):
         entry.grid(column=1, row=1, padx=5, pady=5, sticky="w")
         entry.bind("<ButtonRelease-1>", self.paste)
         
-        self.speed_var = tk.IntVar()
-        self.speed_var.set(12000)
+        self.speed_var = tk.IntVar(value=12000)
         lbl = ttk.Label(frame, text="Download Speed: ")
         lbl.grid(column=0, row=2, padx=5, pady=5, sticky="e")
         vcmd = (self.register(validate), '%P', '%S')
@@ -251,11 +248,19 @@ class Layout(tk.Tk):
         spinbox.grid(column=1, row=2, padx=5, pady=5, sticky="w")
         
         btn = ttk.Button(frame, text="Select File", command=lambda: self.select(fd))
-        btn.grid(column=0, row=3, padx=5, pady=5)
+        btn.grid(column=0, row=3, padx=5, pady=5, sticky="e")
         
         self.folder_var = tk.StringVar()
         entry = ttk.Entry(frame, textvariable=self.folder_var, state="disabled", width=50)
         entry.grid(column=1, row=3, padx=5, pady=5, sticky="w")
+        
+        ttk.Label(frame, text="Keyboard Controls:").grid(column=0, row=4, padx=5, pady=5, sticky="w")
+        ttk.Label(frame, text="Seek video -10 seconds: ").grid(column=0, row=5, padx=5, pady=5, sticky="e")
+        ttk.Label(frame, text="Left Arrow").grid(column=1, row=5, padx=5, pady=5, sticky="w")
+        ttk.Label(frame, text="Seek video +10 seconds: ").grid(column=0, row=6, padx=5, pady=5, sticky="e")
+        ttk.Label(frame, text="Right Arrow").grid(column=1, row=6, padx=5, pady=5, sticky="w")
+        ttk.Label(frame, text="Quit: ").grid(column=0, row=7, padx=5, pady=5, sticky="e")
+        ttk.Label(frame, text="Escape").grid(column=1, row=7, padx=5, pady=5, sticky="w")
         
         return frame
         
